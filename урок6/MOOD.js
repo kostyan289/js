@@ -42,6 +42,5 @@ function mood(numbersOfColors) {
 
 console.log(mood(3));
 console.log(mood(3));
-console.log(mood(3));
 
 
