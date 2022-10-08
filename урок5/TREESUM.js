@@ -10,4 +10,5 @@ else
    res=res.concat(convertToSimpleArray(array[i]));
 return res.reduce((sum, item) => sum + item, 0)
 }
+//Лучше через flat
 
