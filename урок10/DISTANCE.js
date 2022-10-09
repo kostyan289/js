@@ -16,7 +16,7 @@ class Point {
 
   // <!-- скрипт со спецификацией (describe, it...) -->
   describe("Функция distance", function() {
-    it("возвращает 2.83 если аргументы переданны верно", function() {
+    it("возвращает 2.83 если start.x = 2, end.x = 3, strat.y = 4, end.y = 5", function() {
       assert.equal(distance(new Point(2, 3), new Point(4, 5)), 2.83);
     });
     it("выбрасывает ошибку если 1 аргумент не экземпляр класса Point", function() {
