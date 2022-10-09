@@ -7,51 +7,28 @@ class Point {
   console.log(distance(new Point(2, 3), new Point(4, 5)));
 
   function distance(start, end) {
-    try {
-        if(start instanceof Point  &&  end instanceof Point && start.x !== end.x && start.y !== end.y) {
-            return Math.sqrt(((start.x - end.x) ** 2) + ((start.y - end.y) ** 2)).toFixed(2); 
-          }  
-        throw new Error("Были переданы другие аргументы")
-    }
-    catch(error) {
-        console.log(error.message)
-    }
+      if (start instanceof Point  &&  end instanceof Point && start.x !== end.x && start.y !== end.y) {
+        return Number(Math.sqrt(((start.x - end.x) ** 2) + ((start.y - end.y) ** 2)).toFixed(2)); 
+      } else {
+        throw new Error("Были переданы другие аргументы");
+      }; 
   }
 
-  function calcRoots(a, b, c, d) {
-    // матем:
-    const P = Number(Math.sqrt(((a - c) ** 2) + ((b - d) ** 2)).toFixed(2));
-    const x2 = "Неправильно введены точки";
-  
-    if (P < 0) {
-      return x2;
-    }
-  
-    if (P === 0) {
-      return x2;
-    }
-
-    if (P > 0) {
-      let x1 = P
-      return x1;
-    }
-  }
-  
   // <!-- скрипт со спецификацией (describe, it...) -->
-  describe("calcRoots", function() {
-    it("тест1", function() {
-      assert.deepEqual(calcRoots(2,3,4,5), 2.83);
+  describe("Функция distance", function() {
+    it("возвращает 2.83 если аргументы переданны верно", function() {
+      assert.equal(distance(new Point(2, 3), new Point(4, 5)), 2.83);
     });
-    it("тест2", function() {
-      assert.deepEqual(calcRoots(5,7,8,9), 3.61);
+    it("выбрасывает ошибку если 1 аргумент не экземпляр класса Point", function() {
+      assert.throws(() => {distance({x: 2, y: 3}, new Point(3, 4))});
     });
-    it("тест3", function() {
-      assert.deepEqual(calcRoots(6,7,11,24), 17.72);
+    it("выбрасывает ошибку если 2 аргумент не экземпляр класса Point", function() {
+      assert.throws(() => { distance(new Point(2, 3), {x: 4, y: 5}) });
     });
-    it("тест4", function() {
-      assert.deepEqual(calcRoots(4,2,2,4), 2.83);
+    it("выбрасывает ошибку когда была использовалась один и тот же start.х и end.x", function() {
+      assert.throws(() => {distance(new Point(2, 3), new Point(2, 5))});
     });
-    it("тест5", function() {
-      assert.deepEqual(calcRoots(0,0,0,0), 0.00);
+    it("выбрасывает ошибку когда была использовалась один и тот же start.y и end.y", function() {
+      assert.throws(() => {distance(new Point(1, 3), new Point(2, 3))});
     });
   });
