@@ -17,9 +17,8 @@ let count1, count2
 
 //сразу после загрузки страницы срабатывает этот код
 addEventListener("DOMContentLoaded", function() {
-
-    W = document.activeElement.clientWidth
-    H = document.activeElement.clientHeight
+    W = document.documentElement.clientWidth
+    H = document.documentElement.clientHeight
     ball = document.getElementsByClassName("ball")[0]
     player1 = document.getElementsByClassName("player1")[0]
     player2 = document.getElementsByClassName("player2")[0]
@@ -27,16 +26,15 @@ addEventListener("DOMContentLoaded", function() {
     count1 = document.getElementsByClassName("count1")[0]
     count2 = document.getElementsByClassName("count2")[0]
     
-    player1_y = H/2 - 125
-    player1.style.top = player1_y
+    player1_y = H/2 - 125 
+    player1.style.top = player1_y + "px"
 
-    player2_y = H/2 - 125;
-    player2.style.left = W-50
-    player2.style.top = player2_y
+    player2_y = H/2 - 125 ;
+    player2.style.left = W-50 + "px"
+    player2.style.top = player2_y + "px"
 
     x = W/2 - 25 
     y = H/2 - 25
-
     addEventListener("keydown", change_speed)
     setInterval(move,1)
 })
@@ -62,7 +60,6 @@ function loose(n){
 function move(){
     x += xspeed
     y += yspeed
-
     //x и у это координаты левого верхнего угла мячика
     //&& логическое И, 250 - высота платформы
     if ((x<50 && (y > player1_y && y<player1_y+250)) ||
@@ -76,17 +73,17 @@ function move(){
     if (x>W) loose(2)
     if (y<0 || y>H-50) yspeed *= -1
 
-    ball.style.left = x 
-    ball.style.top = y
+    ball.style.left = x + "px"
+    ball.style.top = y + "px"
 
     player1_y += player1_speed
     if (player1_y<0) player1_y = 0
     if (player1_y+250>H) player1_y = H-250
 
-    player1.style.top = player1_y
+    player1.style.top = player1_y + "px"
 
     player2_y += player2_speed
     if (player2_y<0) player2_y = 0
     if (player2_y+250>H) player2_y = H-250
-    player2.style.top = player2_y
+    player2.style.top = player2_y + "px"
 }
